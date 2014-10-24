@@ -2,6 +2,7 @@
 Start by visiting `<base>/salesforce/grant_access`. You'll be prompted to authorize the application by loggin into your organization.
 
 ###Creating a self-signed SSL Certificate
+from http://www.akadia.com/services/ssh_test_certificate.html
 
 When developing from a local server, this can be very useful for testing.
 
