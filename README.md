@@ -8,7 +8,7 @@ When developing from a local server, you can get setup pretty quickly with OpenS
 
 #####Step 1: Generate a Private Key
 ```
->> openssl genrsa -des3 -out server.key 1024`
+openssl genrsa -des3 -out server.key 1024`
 ```
 Output:
 ```
@@ -21,7 +21,7 @@ Verifying password - Enter PEM pass phrase:
 ```
 #####Step 2: Generate a CSR (Certificate Signing Request)
 ```
->> openssl req -new -key server.key -out server.csr
+openssl req -new -key server.key -out server.csr
 ```
 Output:
 ```
@@ -39,13 +39,13 @@ An optional company name []:
 ```
 #####Step 3: Remove Passphrase from Key
 ```
->> cp server.key server.key.org
->> openssl rsa -in server.key.org -out server.key
+cp server.key server.key.org
+openssl rsa -in server.key.org -out server.key
 ```
 #####Step 4: Generating a Self-Signed Certificate
 To generate a temporary certificate which is good for 365 days, issue the following command:
 ```
->> openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 Output
 ```
@@ -57,8 +57,8 @@ Getting Private key
 #####Step 5: Installing the Private Key and Certificate
 When Apache with mod_ssl is installed, it creates several directories in the Apache config directory. The location of this directory will differ depending on how Apache was compiled.
 ```
->> cp server.crt /usr/local/apache/conf/ssl.crt
->> cp server.key /usr/local/apache/conf/ssl.key
+cp server.crt /usr/local/apache/conf/ssl.crt
+cp server.key /usr/local/apache/conf/ssl.key
 ```
 #####Step 6: Configuring SSL Enabled Virtual Hosts
 ```
@@ -94,8 +94,8 @@ NameVirtualHost *:443
 ```
 #####Step 7: Restart Apache and Test
 ```
->> /etc/init.d/httpd stop
->> /etc/init.d/httpd stop
+/etc/init.d/httpd stop
+/etc/init.d/httpd stop
 ```
 Guide taken from https://public.akadia.com
 
