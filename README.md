@@ -76,12 +76,35 @@ When Apache with mod_ssl is installed, it creates several directories in the Apa
 
 ####Step 6: Configuring SSL Enabled Virtual Hosts
 ```
-SSLEngine on
-SSLCertificateFile /usr/local/apache/conf/ssl.crt/server.crt
-SSLCertificateKeyFile /usr/local/apache/conf/ssl.key/server.key
-SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
-CustomLog logs/ssl_request_log \
-   "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+NameVirtualHost *:80
+NameVirtualHost *:443
+
+<VirtualHost *:80> 
+    DocumentRoot "C:\xampp\htdocs"
+    ServerName localhost
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot "C:\xampp\htdocs\CleanScript\danielalamo.com"
+    ServerName dan.dev
+  	<Directory "C:\xampp\htdocs\CleanScript\danielalamo.com">
+	    Order allow,deny
+	    Allow from all
+  	</Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    DocumentRoot "C:\xampp\htdocs\wela_app"
+    ServerName test.dev
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "C:\xampp\htdocs\wela_app">
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
 ```
 
 ####Step 7: Restart Apache and Test
