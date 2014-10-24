@@ -10,7 +10,7 @@ The openssl toolkit is used to generate an RSA Private Key and CSR (Certificate 
 
 The first step is to create your RSA Private Key. This key is a 1024 bit RSA key which is encrypted using Triple-DES and stored in a PEM format so that it is readable as ASCII text.
 ```
-openssl genrsa -des3 -out server.key 1024`
+>openssl genrsa -des3 -out server.key 1024`
 ```
 Output:
 ```
@@ -27,7 +27,7 @@ Once the private key is generated a Certificate Signing Request can be generated
 
 During the generation of the CSR, you will be prompted for several pieces of information. These are the X.509 attributes of the certificate. One of the prompts will be for "Common Name (e.g., YOUR name)". It is important that this field be filled in with the fully qualified domain name of the server to be protected by SSL. If the website to be protected will be https://public.akadia.com, then enter public.akadia.com at this prompt. The command to generate the CSR is as follows:
 ```
-openssl req -new -key server.key -out server.csr
+>openssl req -new -key server.key -out server.csr
 ```
 Output:
 ```
@@ -47,8 +47,8 @@ An optional company name []:
 ####Step 3: Remove Passphrase from Key
 One unfortunate side-effect of the pass-phrased private key is that Apache will ask for the pass-phrase each time the web server is started. Obviously this is not necessarily convenient as someone will not always be around to type in the pass-phrase, such as after a reboot or crash. mod_ssl includes the ability to use an external program in place of the built-in pass-phrase dialog, however, this is not necessarily the most secure option either. It is possible to remove the Triple-DES encryption from the key, thereby no longer needing to type in a pass-phrase. If the private key is no longer encrypted, it is critical that this file only be readable by the root user! If your system is ever compromised and a third party obtains your unencrypted private key, the corresponding certificate will need to be revoked. With that being said, use the following command to remove the pass-phrase from the key:
 ```
-cp server.key server.key.org
-openssl rsa -in server.key.org -out server.key
+>cp server.key server.key.org
+>openssl rsa -in server.key.org -out server.key
 ```
 
 ####Step 4: Generating a Self-Signed Certificate
@@ -56,7 +56,7 @@ At this point you will need to generate a self-signed certificate because you ei
 
 To generate a temporary certificate which is good for 365 days, issue the following command:
 ```
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+>openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 Output
 ```
@@ -69,8 +69,8 @@ Getting Private key
 ####Step 5: Installing the Private Key and Certificate
 When Apache with mod_ssl is installed, it creates several directories in the Apache config directory. The location of this directory will differ depending on how Apache was compiled.
 ```
-cp server.crt /usr/local/apache/conf/ssl.crt
-cp server.key /usr/local/apache/conf/ssl.key
+>cp server.crt /usr/local/apache/conf/ssl.crt
+>cp server.key /usr/local/apache/conf/ssl.key
 ```
 
 ####Step 6: Configuring SSL Enabled Virtual Hosts
@@ -85,8 +85,8 @@ CustomLog logs/ssl_request_log \
 
 ####Step 7: Restart Apache and Test
 ```
-/etc/init.d/httpd stop
-/etc/init.d/httpd stop
+>/etc/init.d/httpd stop
+>/etc/init.d/httpd stop
 ```
 Guide taken from https://public.akadia.com
 
