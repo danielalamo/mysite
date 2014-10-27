@@ -30,6 +30,9 @@ on it to make it listen to all the `data-infuse` elements on that page. For Exam
         });
     </script>
 ```
+####Tracking User Landing Pages
+Whithin some of the wela app controllers, you will find `infuse_url` routes which are called by InfusionSoft based on user clicks on email links. 
+
 ###Doctrine Integration
 ####Creating new Entities
 Please read the [documentation on annotations](http://doctrine-orm.readthedocs.org/en/latest/reference/annotations-reference.html) to create new entities and [working with objects documentation](http://doctrine-orm.readthedocs.org/en/latest/reference/working-with-objects.html)
